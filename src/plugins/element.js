@@ -23,6 +23,7 @@ import {
     Switch,
     Tooltip,
     Pagination,
+    Dialog,
 } from 'element-ui'
 
 Vue.use(Button)
@@ -46,5 +47,6 @@ Vue.use(TableColumn)
 Vue.use(Switch)
 Vue.use(Tooltip)
 Vue.use(Pagination)
+Vue.use(Dialog)
     // $message自定义属性，可以任意改名
 Vue.prototype.$message = Message
