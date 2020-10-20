@@ -24,6 +24,7 @@ import {
     Tooltip,
     Pagination,
     Dialog,
+    MessageBox,
 } from 'element-ui'
 
 Vue.use(Button)
@@ -50,3 +51,4 @@ Vue.use(Pagination)
 Vue.use(Dialog)
     // $message自定义属性，可以任意改名
 Vue.prototype.$message = Message
+Vue.prototype.$confirm = MessageBox.confirm

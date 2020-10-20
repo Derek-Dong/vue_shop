@@ -60,6 +60,7 @@
               type="danger"
               icon="el-icon-delete"
               size="mini"
+              @click="removeUserById(scope.row.id)"
             ></el-button>
             <!-- 分配角色按钮 -->
             <el-tooltip
@@ -348,6 +349,35 @@ export default {
         // 提示修改成功
         this.$message.success("更新用户信息成功！");
       });
+    },
+    //根据Id删除对应的用户数据
+    async removeUserById(id) {
+      // 弹窗询问用户是否删除数据
+      const confirmResult = await this.$confirm(
+        "此操作将永久删除该用户，是否继续？",
+        "提示",
+        {
+          confirmBottonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning",
+        }
+      ).catch((err) => err);
+
+      // 如果用户确认删除，则返回值为字符串 confirm
+      // 如果用户取消了删除，则返回值为字符串 cancel
+      // console.log(confirmResult)
+      if (confirmResult !== "confirm") {
+        return this.$message.info("已取消删除");
+      }
+
+      const { data: res } = await this.$http.delete("users/" + id);
+
+      if (res.meta.status !== 200) {
+        return this.$message.error("删除用户失败！");
+      }
+
+      this.$message.success("删除用户成功！");
+      this.getUserList();
     },
   },
 };
