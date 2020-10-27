@@ -18,7 +18,7 @@ import 'quill/dist/quill.bubble.css'
 
 import axios from 'axios'
 // 配置根路径
-axios.defaults.baseURL = 'http://timemeetyou.com:8889/api/private/v1/'
+axios.defaults.baseURL = 'http://rambuild.cn:8888/api/private/v1'
     // axios请求拦截
 axios.interceptors.request.use(config => {
     // 为请求头对象，添加Token验证Authorization字段
