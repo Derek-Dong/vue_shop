@@ -16,15 +16,26 @@ import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
 
+// 导入NProgess包对应的JS和CSS
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
+
 import axios from 'axios'
 // 配置根路径
 axios.defaults.baseURL = 'http://rambuild.cn:8888/api/private/v1'
     // axios请求拦截
+    // 在request拦截器中，展示进度条NProgress.start()
 axios.interceptors.request.use(config => {
-    // 为请求头对象，添加Token验证Authorization字段
-    console.log(config)
-    config.headers.Authorization = window.sessionStorage.getItem('token')
-        // 在最后必须return config
+        // console.log(config)
+        NProgress.start()
+            // 为请求头对象，添加Token验证Authorization字段
+        config.headers.Authorization = window.sessionStorage.getItem('token')
+            // 在最后必须return config
+        return config
+    })
+    // 在response拦截器中，隐藏进度条 NProgress.done()
+axios.interceptors.response.use(config => {
+    NProgress.done()
     return config
 })
 Vue.prototype.$http = axios
