@@ -1,11 +1,10 @@
 <template>
   <div>
     <!-- 面包屑导航区域 -->
-    <el-breadcrumb separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>数据统计</el-breadcrumb-item>
-      <el-breadcrumb-item>数据报表</el-breadcrumb-item>
-    </el-breadcrumb>
+    <bread-crumb>
+      <span slot="manage">数据统计</span>
+      <span slot="list">数据报表</span>
+    </bread-crumb>
 
     <!-- 卡片视图区域 -->
     <el-card>
@@ -20,7 +19,10 @@
 import echarts from "echarts";
 import _ from "lodash";
 
+import BreadCrumb from "../common/BreadCrumb";
+
 export default {
+  components: { BreadCrumb },
   data() {
     return {
       // 需要合并的数据

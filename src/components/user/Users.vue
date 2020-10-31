@@ -1,11 +1,10 @@
 <template>
   <div>
     <!-- 面包屑导航区域 -->
-    <el-breadcrumb separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>用户管理</el-breadcrumb-item>
-      <el-breadcrumb-item>用户列表</el-breadcrumb-item>
-    </el-breadcrumb>
+    <bread-crumb>
+      <span slot="manage">用户管理</span>
+      <span slot="list">用户列表</span>
+    </bread-crumb>
 
     <!-- 卡片视图区域 -->
     <el-card>
@@ -87,6 +86,7 @@
         :page-sizes="[1, 2, 5, 10]"
         :page-size="queryInfo.pagesize"
         layout="total, sizes, prev, pager, next, jumper"
+        :total="total"
       ></el-pagination>
     </el-card>
 
@@ -185,7 +185,10 @@
 </template>
 
 <script>
+import BreadCrumb from "../common/BreadCrumb";
+
 export default {
+  components: { BreadCrumb },
   data() {
     // 验证邮箱的规则
     var checkEmail = (rule, value, cb) => {

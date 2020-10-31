@@ -1,11 +1,10 @@
 <template>
   <div>
     <!-- 面包屑导航区域 -->
-    <el-breadcrumb separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>权限管理</el-breadcrumb-item>
-      <el-breadcrumb-item>权限列表</el-breadcrumb-item>
-    </el-breadcrumb>
+    <bread-crumb>
+      <span slot="manage">权限管理</span>
+      <span slot="list">权限列表</span>
+    </bread-crumb>
 
     <!-- 卡片视图 -->
     <el-card>
@@ -28,7 +27,10 @@
 </template>
 
 <script>
+import BreadCrumb from "../common/BreadCrumb";
+
 export default {
+  components: { BreadCrumb },
   data() {
     return {
       // 权限列表

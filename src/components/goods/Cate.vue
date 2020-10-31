@@ -1,11 +1,10 @@
 <template>
   <div>
     <!-- 面包屑导航区域 -->
-    <el-breadcrumb separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>商品管理</el-breadcrumb-item>
-      <el-breadcrumb-item>商品分类</el-breadcrumb-item>
-    </el-breadcrumb>
+    <bread-crumb>
+      <span slot="manage">商品管理</span>
+      <span slot="list">商品分类</span>
+    </bread-crumb>
 
     <!-- 卡片视图区域 -->
     <el-card>
@@ -113,7 +112,10 @@
 </template>
 
 <script>
+import BreadCrumb from "../common/BreadCrumb";
+
 export default {
+  components: { BreadCrumb },
   data() {
     return {
       // 查询条件
