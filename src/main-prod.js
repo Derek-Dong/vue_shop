@@ -17,7 +17,7 @@ import NProgress from 'nprogress'
 
 import axios from 'axios'
 // 配置根路径
-axios.defaults.baseURL = 'http://rambuild.cn:8888/api/private/v1'
+axios.defaults.baseURL = 'https://www.liulongbin.top:8888/api/private/v1/'
     // axios请求拦截
     // 在request拦截器中，展示进度条NProgress.start()
 axios.interceptors.request.use(config => {
