@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import './plugins/element.js'
+import elementUi from 'element-ui'
 // 导入字体图标
 import './assets/fonts/iconfont.css'
 // 导入全局样式表
@@ -20,6 +20,8 @@ import 'quill/dist/quill.bubble.css'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 
+Vue.use(elementUi)
+
 import axios from 'axios'
 // 配置根路径
 axios.defaults.baseURL = 'https://www.liulongbin.top:8888/api/private/v1/'
@@ -28,9 +30,9 @@ axios.defaults.baseURL = 'https://www.liulongbin.top:8888/api/private/v1/'
 axios.interceptors.request.use(config => {
         // console.log(config)
         NProgress.start()
-            // 为请求头对象，添加Token验证Authorization字段
+        // 为请求头对象，添加Token验证Authorization字段
         config.headers.Authorization = window.sessionStorage.getItem('token')
-            // 在最后必须return config
+        // 在最后必须return config
         return config
     })
     // 在response拦截器中，隐藏进度条 NProgress.done()
@@ -46,6 +48,7 @@ Vue.component('tree-table', TreeTable)
     // 将富文本编辑器，注册为全局可用的组件
 Vue.use(VueQuillEditor)
 
+// 定义一个全局日期格式化
 Vue.filter('dateFormat', function(originVal) {
     const dt = new Date(originVal)
 
