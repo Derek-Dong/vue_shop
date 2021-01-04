@@ -381,28 +381,31 @@ export default {
     },
     //根据Id删除对应的用户数据
     async removeUserById(id) {
-      // 弹窗询问用户是否删除数据
-      const confirmResult = await this.$confirm(
-        "此操作将永久删除该用户，是否继续？",
-        "提示",
+      // console.log(id);
+      const removeConfirm = await this.$confirm(
+        '此操作将永久删除用户, 是否继续?',
+        '提示',
         {
-          confirmBottonText: "确定",
-          cancelButtonText: "取消",
-          type: "warning",
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
         }
-      ).catch((err) => err);
-      // 如果用户确认删除，则返回值为字符串 confirm
-      // 如果用户取消了删除，则返回值为字符串 cancel
-      // console.log(confirmResult)
-      if (confirmResult !== "confirm") {
-        return this.$message.info("已取消删除");
+      ).catch(err => err);
+      // 当点击确定，返回字符串 confirm
+      // 当点击取消，返回字符串 cancle
+      // console.log(removeConfirm);
+      if (removeConfirm === 'confirm') {
+        // 发起删除用户请求
+        const { data: res } = await this.$http.delete('users/' + id);
+        // 请求失败，返回错误提示
+        if (res.meta.status !== 200) {
+          return this.$message.error(res.meta.status + ' : 删除用户失败！');
+        }
+        // 请求成功，重新读取用户列表
+        this.getUserList();
+        // 返回成功提示
+        return this.$message.success('删除用户成功！');
       }
-      const { data: res } = await this.$http.delete("users/" + id);
-      if (res.meta.status !== 200) {
-        return this.$message.error("删除用户失败！");
-      }
-      this.$message.success("删除用户成功！");
-      this.getUserList();
     },
     // 展示分配角色的对话框
     async setRole(userInfo) {
